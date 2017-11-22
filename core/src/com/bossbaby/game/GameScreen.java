@@ -1,42 +1,95 @@
 package com.bossbaby.game;
 import com.badlogic.gdx.Gdx;
+
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 
 public class GameScreen extends ScreenAdapter {
-	private PacmanGame pacmanGame;
-	private Texture pacmanImg;
-	private int x;
-    private int y;
+	//private Pacman pacman;
+	//private int x;
+    //private int y;
  
+	World world;
+	//Pacman pacman = world.getPacman();//////////////////////swich
+	WorldRenderer worldRenderer;
+	PacmanGame pacmanGame;
+	
 	
     public GameScreen(PacmanGame pacmanGame) {
-        this.pacmanGame = pacmanGame;
-        pacmanImg = new Texture("pacman.png");
-        x=100;
-        y=100;
+        
+    	this.pacmanGame = pacmanGame;
+    	
+        //pacmanImg = new Texture("pacman.png");
+        
+        world = new World(pacmanGame);
+        worldRenderer = new WorldRenderer(pacmanGame,world);
+        
+        //pacman = new Pacman(100,100);
+        //x=100;
+        //y=100;
     }
    
-    @Override
+ 
+
+
     public void render(float delta) {
-        System.out.println("Hello " + delta);
-        update(delta);
+        
+        
+		update(delta);
+        /*System.out.println("Hello " + delta);
         SpriteBatch batch = pacmanGame.batch;
         batch.begin();
-        batch.draw(pacmanImg, x, y);
+        
+        Vector2 pos = pacman.getPosition();
+        batch.draw(pacmanImg, pos.x, pos.y);*/
+        
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.end();
+        
+        worldRenderer.render(delta);
+        
+        //batch.end();
     }
-    private void update(float delta) {
+    public void update(float delta) {
+    	updatePacmanDirection();
+    	/*Pacman pacman = world.getPacman();
     	if(Gdx.input.isKeyPressed(Keys.LEFT)) {
-            x -= 10;
+    		pacman.setNextDirection(Pacman.DIRECTION_LEFT);
         }
-        if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
-            x += 10;
+    	else if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
+        	pacman.setNextDirection(Pacman.DIRECTION_RIGHT);
         }    
+    	else if(Gdx.input.isKeyPressed(Keys.UP)) {
+        	pacman.setNextDirection(Pacman.DIRECTION_UP);
+        }    
+    	else if(Gdx.input.isKeyPressed(Keys.DOWN)) {
+        	pacman.setNextDirection(Pacman.DIRECTION_DOWN);
+        }
+        else {
+        	pacman.setNextDirection(Pacman.DIRECTION_STILL);
+        }*/
+     
+        world.update(delta);
+    }
+    private void updatePacmanDirection() {
+    	Pacman pacman = world.getPacman();
+    	if(Gdx.input.isKeyPressed(Keys.LEFT)) {
+    		pacman.setNextDirection(Pacman.DIRECTION_LEFT);
+        }
+    	else if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
+        	pacman.setNextDirection(Pacman.DIRECTION_RIGHT);
+        }    
+    	else if(Gdx.input.isKeyPressed(Keys.UP)) {
+        	pacman.setNextDirection(Pacman.DIRECTION_UP);
+        }    
+    	else if(Gdx.input.isKeyPressed(Keys.DOWN)) {
+        	pacman.setNextDirection(Pacman.DIRECTION_DOWN);
+        }
+        else {
+        	pacman.setNextDirection(Pacman.DIRECTION_STILL);
+        }
+     
     }
 }
