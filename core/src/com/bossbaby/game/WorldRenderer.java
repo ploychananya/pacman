@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class WorldRenderer{
 	private Texture pacmanImg;
+	private Texture shipImg;
 	private MazeRenderer mazeRenderer;
 	PacmanGame pacmanGame;
 	Pacman pacman;
@@ -32,6 +33,7 @@ public class WorldRenderer{
  
         
         pacmanImg = new Texture("pacman.png");
+        shipImg = new Texture("ship1.png");
       
     }
 
@@ -43,8 +45,10 @@ public class WorldRenderer{
        //batch.draw(pacmanImg,posi.x,posi.y);
        SpriteBatch batch = pacmanGame.batch;
        Vector2 pos = world.getPacman().getPosition();
+       Vector2 pos_ship = world.getShip().getPosition();
        //batch.begin();
        batch.draw(pacmanImg, pos.x - BLOCK_SIZE/2, PacmanGame.HEIGHT - pos.y - BLOCK_SIZE/2);
+       batch.draw(shipImg, pos_ship.x - BLOCK_SIZE/2, PacmanGame.HEIGHT - pos_ship.y - BLOCK_SIZE/2);
        //batch.end();
        font.draw(batch, "" + world.getScore(), 700, 60);
        batch.end();

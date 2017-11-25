@@ -26,7 +26,7 @@ public class Pacman {
 	//int count =0;
 	public Pacman(int x, int y,World world) { //pacman can refference maze 
 		this.world = world;
-		Maze maze = world.getMaze();
+		//Maze maze = world.getMaze();
 		position = new Vector2(x,y);
 		listeners = new LinkedList<DotEattenListener>();
 		//listeners = new LinkedList<DotEattenListener>(); //score
@@ -39,7 +39,7 @@ public class Pacman {
 	        	//count++;
 	       // }
 	}
-	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	public interface DotEattenListener {
         void notifyDotEatten();			
     }
@@ -53,7 +53,7 @@ public class Pacman {
             l.notifyDotEatten();
         }
     }
-    
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////   
 	
 	public void setNextDirection(int dir) {
         nextDirection = dir;
@@ -94,7 +94,7 @@ public class Pacman {
         position.y += SPEED * DIR_OFFSETS[dir][1];
     }
     
-    public boolean isAtCenter() {
+    protected boolean isAtCenter() {
         int blockSize = WorldRenderer.BLOCK_SIZE;
  
         return ((((int)position.x - blockSize/2) % blockSize) == 0) &&
@@ -124,7 +124,7 @@ public class Pacman {
     	Maze maze = world.getMaze();
     	int newRow = getRow()+(DIR_OFFSETS[dir][1]); 
         int newCol = getColumn()+(DIR_OFFSETS[dir][0]);
-        return  ! maze.hasWallAt(newRow,newCol);   
+        return  ! maze.hasSandAt(newRow,newCol);   
     }
     
     private int getRow() {

@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class PacmanGame extends Game {
 //public class PacmanGame extends ApplicationAdapter{
 	public SpriteBatch batch;
-	public static final int HEIGHT = 600;
-	public static final int WIDTH = 800;
+	public static final int HEIGHT = 640;
+	public static final int WIDTH = 1280;
 	@Override
 	public void create () {
         batch = new SpriteBatch();
